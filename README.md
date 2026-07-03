@@ -1,4 +1,4 @@
-# 🤖 AI Revenue Intelligence & Sales Outreach Agent
+# AI Revenue Intelligence & Sales Outreach Agent
 
 ## 📌 Project Overview
 
