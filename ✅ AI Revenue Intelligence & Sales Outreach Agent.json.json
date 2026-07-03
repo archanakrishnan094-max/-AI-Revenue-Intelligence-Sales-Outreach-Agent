@@ -1,0 +1,966 @@
+{
+  "name": "✅ AI Revenue Intelligence & Sales Outreach Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "37bc3126-9f71-40c8-966c-9fc61fc871c1",
+              "name": "=company_name",
+              "value": "={{$json.chatInput}}",
+              "type": "string"
+            },
+            {
+              "id": "eaa7f4a4-3bf9-4025-aa1b-683d7cf7800e",
+              "name": "=website",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "6c0ca55f-618e-4137-95e8-01762bfa8799",
+              "name": "Industry",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "8d7aaae8-7595-464b-9d44-ec24bf64c542",
+              "name": "employee_size",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "91c5305a-e7bb-444e-8ba1-0f005a68ec9b",
+              "name": "target_market",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "b4d670ce-1819-4754-b1f2-243ce09ddbfd",
+              "name": "country",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "2a33925b-989b-41c7-b6ee-cfe9b175cac7",
+              "name": "headquarters",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "bb1d80e7-6cac-402b-8645-7b5c65e5c181",
+              "name": "founded",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "dbeacb4b-3324-4b10-83bc-fbbdf16284cf",
+              "name": "product",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "f29532e1-23fa-4b90-8504-c255b4bd7c94",
+              "name": "priority",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "a35a8f82-82ed-422b-b6da-6c9d663f1d9b",
+              "name": "research_depth",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        272,
+        16
+      ],
+      "id": "507056d3-2d21-4102-8fd7-7e3440e9ffe2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        848,
+        192
+      ],
+      "id": "0ce5637e-04c2-4b9f-b171-a1d549e8baaf",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "QDoFEVekzKsQEEwh",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        80,
+        16
+      ],
+      "id": "112c7ec2-2c00-4f9b-b769-2a57c72e1ac3",
+      "name": "When chat message received",
+      "webhookId": "bc41e700-776f-4b7d-9065-016377a51029"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{$json.company_name}} company profile headquarters founded employee count CEO industry products official website competitors latest news"
+            },
+            {
+              "name": "search_depth",
+              "value": "advanced"
+            },
+            {
+              "name": "max_results",
+              "value": "5"
+            },
+            {
+              "name": "include_answer",
+              "value": "Advanced"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        16
+      ],
+      "id": "6fa306fb-1ba9-4f1e-8d87-e502aa71245b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10a4f18d-ed5d-45a7-84ad-df60e73fc253",
+              "name": "company",
+              "value": "={{$json.query}}",
+              "type": "string"
+            },
+            {
+              "id": "e08857f5-f4d5-4a3c-974a-0e0661cf8ac3",
+              "name": "summery",
+              "value": "={{$json.answer}}",
+              "type": "string"
+            },
+            {
+              "id": "e5c16317-bf70-4273-bcb2-6b3e4b0644ad",
+              "name": "sources",
+              "value": "={{$json.results}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        688,
+        16
+      ],
+      "id": "e4aa4325-90e9-4e40-8197-1a7d6e730f70",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1136,
+        224
+      ],
+      "id": "0dae526f-e03c-4b9e-80f8-0df14514dbd8",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "QDoFEVekzKsQEEwh",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1456,
+        240
+      ],
+      "id": "cb352c1b-a210-44d4-b8c1-6604871c4c20",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "QDoFEVekzKsQEEwh",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an expert Revenue Intelligence Analyst.\n\nUse ONLY the live search results provided below.\nDo not make up facts.\nIf information is unavailable, write \"Not Found\".\n\nCompany:\n{{$json.company}}\n\nSummary:\n{{$json.summary}}\n\nSources:\n{{$json.sources}}\n\nGenerate a professional Revenue Intelligence Report using the following format.\n\n====================================\nREVENUE INTELLIGENCE REPORT\n====================================\n\nCompany Name:\n\nExecutive Summary:\n\nIndustry:\n\nProducts & Services:\n\nHeadquarters:\n\nEmployee Size:\n\nFounded:\n\nTarget Customers:\n\nBusiness Model:\n\nTechnology Focus:\n\nCompetitive Advantages:\n\nTop Competitors:\n\nFor each competitor include:\n\n• Company Name\n\n• Why they compete with the target company\n\n• Main Products\n\n• Key Strengths\n\n• Weaknesses\n\n• Estimated Market Position\n\n-----------------------------------\n\nCompetitive Comparison\n\nCompare the company against its top competitors.\n\nCreate a comparison table including:\n\nCompany\n\nMain Product\n\nIdeal Customers\n\nStrengths\n\nWeaknesses\n\nPricing Position (Low / Medium / Premium)\n\n-----------------------------------\n\nCompetitive Advantages\n\nList the unique advantages this company has.\n\n-----------------------------------\n\nCompetitive Risks\n\nExplain why customers might choose competitors instead.\n\nRecent News:\n\nRevenue Opportunities:\n\nPotential Business Challenges:\n\nSuggested Sales Pitch:\n\nSuggested Discovery Questions:\n\nRecommended Outreach Strategy:\n\nRisk Assessment:\n\nOverall Recommendation:                     Think step by step before answering.\n\nPrioritize information that is useful for B2B sales teams.\n\nIdentify potential buying signals whenever possible.\n\nHighlight opportunities that could help an Account Executive or SDR.\n\nAvoid generic descriptions.                  =========================================================\nLEAD SCORING & SALES INTELLIGENCE\n=========================================================\n\nBased ONLY on the live web search results and company analysis above, evaluate the company as a potential B2B sales prospect.\n\nProvide the following:\n\n## Lead Score (0-100)\n\nOverall Lead Score:\n(Provide a score between 0 and 100.)\n\n## Buying Intent\n\nClassify as one of:\n- Low\n- Medium\n- High\n\nExplain why.\n\n## AI Adoption\n\nClassify as:\n- Low\n- Medium\n- High\n\nExplain the reasoning.\n\n## Cloud Maturity\n\nClassify as:\n- Low\n- Medium\n- High\n\nExplain the reasoning.\n\n## Estimated Budget\n\nEstimate:\n\n- Low\n- Medium\n- High\n\nExplain why.\n\n## Growth Potential\n\nClassify as:\n- Low\n- Medium\n- High\n\nSupport your answer using available evidence.\n\n## Technology Readiness\n\nRate from 1 to 10.\n\nExplain your rating.\n\n## Sales Priority\n\nRate:\n\n⭐\n⭐⭐\n⭐⭐⭐\n⭐⭐⭐⭐\n⭐⭐⭐⭐⭐\n\nExplain why this priority was assigned.\n\n## Recommended Buyer Personas\n\nIdentify the people most likely to purchase AI or GTM solutions.\n\nExamples:\n- CEO\n- CTO\n- CIO\n- VP of Sales\n- Head of Revenue Operations\n- Director of Marketing\n- Head of AI\n- Product Manager\n\n## Buying Signals\n\nIdentify any buying signals such as:\n\n- Recent funding\n- Hiring growth\n- AI initiatives\n- Cloud migration\n- Digital transformation\n- New product launches\n- Partnerships\n- International expansion\n\n## Recommended Next Action\n\nRecommend ONE of the following:\n\n- Contact immediately\n- High Priority Prospect\n- Nurture Lead\n- Monitor for Future\n\nExplain your recommendation.\n\n=========================================================\n\nReturn the final answer in a clean professional report using headings and bullet points.\nDo not invent information.\nIf information is unavailable, clearly write \"Not Found\".",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an expert GTM and Revenue Intelligence Analyst.  Analyze the following company.  Company Name: {{$json.company_name}} Website: {{$json.website}} Industry: {{$json.industry}} Employee Size: {{$json.employee_size}} Target Market: {{$json.target_market}} Country: {{$json.country}}  Provide:  1. Company Overview 2. Products and Services 3. Ideal Customer Profile 4. Buyer Personas 5. Competitors 6. GTM Opportunities 7. Sales Recommendations 8. Potential Risks           \nProduce a detailed report of at least 1200 words.\n\nUse headings.\n\nInclude bullet points.\n\nBe specific.\n\nDo not summarize.\n\nReturn complete information for each section.  "
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        848,
+        16
+      ],
+      "id": "a8428c38-39ef-40c0-bdc4-a84aed32483c",
+      "name": "🧠 Revenue Intelligence Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an expert B2B Sales Development Representative (SDR) and GTM Engineer.\n\nYou have received the following Revenue Intelligence Report.\n\n=========================================\nRevenue Intelligence Report\n=========================================\n\n{{$json.text}}\n\n=========================================\n\nUsing ONLY the information above, generate the following:\n\n# 1. Personalized Cold Email\n\nWrite a professional cold email.\n\nInclude:\n- Subject Line\n- Greeting\n- Personalized opening\n- Value proposition\n- Clear CTA\n- Professional closing\n\n-----------------------------------------\n\n# 2. LinkedIn Connection Request\n\nMaximum 300 characters.\n\nFriendly and personalized.\n\n-----------------------------------------\n\n# 3. LinkedIn Follow-up Message\n\nAssume the connection request has been accepted.\n\nWrite a short follow-up.\n\n-----------------------------------------\n\n# 4. Discovery Call Opening\n\nWrite a 30-second opening statement for a sales discovery call.\n\n-----------------------------------------\n\n# 5. Discovery Questions\n\nGenerate 5 thoughtful discovery questions.\n\n-----------------------------------------\n\n# 6. Key Value Proposition\n\nExplain why this company should consider an AI GTM automation solution.\n\n-----------------------------------------\n\n# 7. Possible Objections\n\nList 3 possible objections.\n\nProvide a suggested response for each.\n\n-----------------------------------------\n\n# 8. Best Call-To-Action\n\nRecommend the most appropriate CTA.\n\nExamples:\n\n• Book a Demo\n• Schedule Discovery Call\n• Product Walkthrough\n• AI Assessment\n• Free Consultation\n\n-----------------------------------------\n\nReturn everything in a clean, professional format.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1136,
+        16
+      ],
+      "id": "f725e0e1-9cbb-4f00-bdca-81e776fcaebc",
+      "name": "📧 Sales Outreach Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an API response formatter.\n\nYour task is to convert the following Revenue Intelligence Report into valid JSON.\n\nRevenue Intelligence Report:\n\n{{$json.text}}\n\nReturn ONLY valid JSON.\n\nDo not use markdown.\n\nDo not use triple backticks.\n\nReturn this structure exactly:\n\n{\n  \"company\": \"\",\n  \"industry\": \"\",\n  \"headquarters\": \"\",\n  \"employee_size\": \"\",\n  \"founded\": \"\",\n  \"products_services\": \"\",\n  \"target_customers\": \"\",\n  \"competitors\": [],\n  \"lead_score\": \"\",\n  \"buying_intent\": \"\",\n  \"sales_priority\": \"\",\n  \"buyer_personas\": [],\n  \"buying_signals\": [],\n  \"recommended_action\": \"\",\n  \"cold_email_generated\": true\n}\n\nIf information is unavailable, use \"Not Found\".\n\nReturn JSON only.                            Your response must contain ONLY valid JSON.\nDo not include explanations.\nDo not include markdown.\nDo not wrap the JSON in triple backticks.",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1456,
+        16
+      ],
+      "id": "fdad571f-fe6a-4c3f-9261-2c6d38fc5197",
+      "name": "📊 Structured Data Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        2368,
+        256
+      ],
+      "id": "ca9f96b8-d2e7-4b9e-a5fa-59ea6557b0f4",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "QDoFEVekzKsQEEwh",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an expert B2B Sales Copywriter and SDR specializing in highly personalized cold outreach.\n\nUsing the company intelligence below, generate a professional cold email.\n\nCompany: {{$json.company}}\n\nIndustry: {{$json.industry}}\n\nHeadquarters: {{$json.headquarters}}\n\nEmployee Size: {{$json.employee_size}}\n\nLead Score: {{$json.lead_score}}\n\nBuying Intent:\n{{$json.buying_intent}}\n\nSales Priority:\n{{$json.sales_priority}}\n\nBuyer Personas:\n{{$json.buyer_personas}}\n\nBuying Signals:\n{{$json.buying_signals}}\n\nRecommended Action:\n{{$json.recommended_action}}\n\nInstructions:\n\n* Write a compelling subject line.\n* Personalize the opening.\n* Mention one buying signal.\n* Explain how our AI solutions can help.\n* Keep the email under 180 words.\n* End with a clear call-to-action.\n* Be professional and conversational.\n* Do NOT use Markdown.\n* Return ONLY valid JSON.\n* Do NOT include explanations.\n* Do NOT wrap the response in triple backticks.\n\nReturn exactly this JSON format:\n\n{\n\"subject\": \"\",\n\"greeting\": \"\",\n\"opening\": \"\",\n\"value_proposition\": \"\",\n\"call_to_action\": \"\",\n\"closing\": \"\",\n\"email\": \"\",\n\"generated_time\": \"{{new Date().toISOString()}}\",\n\"email_status\": \"Generated\"\n}\n",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        2368,
+        16
+      ],
+      "id": "198c0545-9a73-4403-b896-bf959200858c",
+      "name": "📧 AI Cold Email Generator"
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.text;\n\nconst data = JSON.parse(output);\n\nreturn [\n  {\n    json: data\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1856,
+        16
+      ],
+      "id": "8c830d29-3118-4158-b6fe-2135680987d2",
+      "name": "🔄 Format Company Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.text;\n\nconst data = JSON.parse(output);\n\nreturn [\n  {\n    json: data\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2656,
+        16
+      ],
+      "id": "72c2bdad-003f-41eb-9a84-cab12cd9d0a6",
+      "name": "🔄 Format Email Data"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2880,
+        -464
+      ],
+      "id": "694a8ef2-9546-498d-be3d-8529148f5bae",
+      "name": "🔀 Merge Company & Email Data"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1XYnkTLdDKzFLf2vWcNatuzMRER8GY0DtQnf6Eft5Tjo",
+          "mode": "list",
+          "cachedResultName": "AI Revenue Intelligence Platform",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XYnkTLdDKzFLf2vWcNatuzMRER8GY0DtQnf6Eft5Tjo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 251192406,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XYnkTLdDKzFLf2vWcNatuzMRER8GY0DtQnf6Eft5Tjo/edit#gid=251192406"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company": "={{$json.company}}",
+            "Industry": "={{$json.industry}}",
+            "Greeting": "={{$json.greeting}}",
+            "Email Subject": "={{$json.subject}}",
+            "Opening": "={{$json.opening}}",
+            "Value Proposition": "={{$json.value_proposition}}",
+            "Call To Action": "={{$json.call_to_action}}",
+            "Closing": "={{$json.closing}}",
+            "Full Cold Email": "={{$json.email}}",
+            "Generated Time": "={{$json.generated_time}}",
+            "Email Status": "={{$json.email_status}}",
+            "Headquarters": "={{$json.headquarters}}",
+            "Employee Size": "={{ $json.employee_size}}",
+            "Founded": "={{ $json.founded}}",
+            "Products & Services": "={{$json.products_services}}",
+            "Target Customers": "={{$json.target_customers}}",
+            "Competitors": "={{$json.competitors}}",
+            "Lead Score": "={{$json.lead_score}}",
+            "Buying Intent": "={{$json.buying_intent}}",
+            "Sales Priority": "={{$json.sales_priority}}",
+            "Buyer Personas": "={{$json.buyer_personas}}",
+            "Buying Signals": "={{$json.buying_signals}}",
+            "Recommended Action": "={{$json.recommended_action}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Industry",
+              "displayName": "Industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Headquarters",
+              "displayName": "Headquarters",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Employee Size",
+              "displayName": "Employee Size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Founded",
+              "displayName": "Founded",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Products & Services",
+              "displayName": "Products & Services",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Target Customers",
+              "displayName": "Target Customers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Competitors",
+              "displayName": "Competitors",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Lead Score",
+              "displayName": "Lead Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Buying Intent",
+              "displayName": "Buying Intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sales Priority",
+              "displayName": "Sales Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Buyer Personas",
+              "displayName": "Buyer Personas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Buying Signals",
+              "displayName": "Buying Signals",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recommended Action",
+              "displayName": "Recommended Action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email Subject",
+              "displayName": "Email Subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Greeting",
+              "displayName": "Greeting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Opening",
+              "displayName": "Opening",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Value Proposition",
+              "displayName": "Value Proposition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Call To Action",
+              "displayName": "Call To Action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Closing",
+              "displayName": "Closing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Full Cold Email",
+              "displayName": "Full Cold Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Generated Time",
+              "displayName": "Generated Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Status",
+              "displayName": "Email Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3168,
+        16
+      ],
+      "id": "47f56c21-b636-4d1e-bedb-ce43130964eb",
+      "name": "📄 Save Results to Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TKlKvQiHovOOEPmw",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "recipient@example.com",
+        "subject": "={{ $json[\"Email Subject\"] }}",
+        "emailType": "text",
+        "message": "={{ $json[\"Full Cold Email\"] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3472,
+        16
+      ],
+      "id": "d9b224fc-63b0-4b81-91bd-59caa44b5cdc",
+      "name": "✉️ Send Cold Email",
+      "webhookId": "b7cb41b9-2a85-4c69-a70a-5b695cf579ff",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BEC9vcOxKf4BaoBO",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "🟦 Company Research\n\nCompany Research & Revenue Intelligence\n- Analyze company profile\n- Identify target customers\n- Discover buying signals\n- Generate sales insights",
+        "height": 192,
+        "width": 848
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        848,
+        -208
+      ],
+      "id": "2d04121c-5318-448f-8b87-3728d0e25877",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "🟨 AI Email Generation\n\nAI Cold Email Generation\n- Create personalized outreach\n- Generate subject line\n- Format email output",
+        "width": 384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        -160
+      ],
+      "id": "d426456f-2ef7-43b5-b67f-0a47262a6db7",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "🟥 Email Automation\n\nAutomated Email Delivery\n\nReplace recipient@example.com\nwith a real recipient before\nproduction use."
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3456,
+        176
+      ],
+      "id": "8e1370ae-7ced-4c24-b20e-685b0d54f067",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "🟩 Data Storage\n\nStore AI-generated insights\nand outreach data in\nGoogle Sheets",
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3104,
+        -304
+      ],
+      "id": "25930043-9e93-4619-ab70-bfd7739e8bc9",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🧠 Revenue Intelligence Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "🧠 Revenue Intelligence Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "📧 Sales Outreach Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "📊 Structured Data Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🧠 Revenue Intelligence Agent": {
+      "main": [
+        [
+          {
+            "node": "📧 Sales Outreach Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📧 Sales Outreach Agent": {
+      "main": [
+        [
+          {
+            "node": "📊 Structured Data Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📊 Structured Data Agent": {
+      "main": [
+        [
+          {
+            "node": "🔄 Format Company Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "📧 AI Cold Email Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📧 AI Cold Email Generator": {
+      "main": [
+        [
+          {
+            "node": "🔄 Format Email Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔄 Format Company Data": {
+      "main": [
+        [
+          {
+            "node": "🔀 Merge Company & Email Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "📧 AI Cold Email Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔄 Format Email Data": {
+      "main": [
+        [
+          {
+            "node": "🔀 Merge Company & Email Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "🔀 Merge Company & Email Data": {
+      "main": [
+        [
+          {
+            "node": "📄 Save Results to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📄 Save Results to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "✉️ Send Cold Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "✉️ Send Cold Email": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9e37a4e6-4247-4ae2-8017-0af4bb2e9c58",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3fbb48e1adf15a10d9f2bf191054a2eefce2dbf340584a573060abd2361e0b8f"
+  },
+  "nodeGroups": [],
+  "id": "P9RLyjIpaOpB8juU",
+  "tags": []
+}
