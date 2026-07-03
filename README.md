@@ -142,7 +142,7 @@ This workflow reduces manual research time by automating:
 
 **Archana Krishnan**
 
-AI Automation | Generative AI | Workflow Automation | Solutions Engineering | GTM Engineering
+AI Automation | Generative AI | Workflow Automation | Electrical &Electronics Engineer | Solutions Engineering | GTM Engineering
 
 ---
 
