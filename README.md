@@ -1,44 +1,86 @@
-# AI Revenue Intelligence & Sales Outreach Agent
+# 🚀 AI Revenue Intelligence & Sales Outreach Agent
+
+## 🎥 Project Demo
+
+Watch the complete project demonstration on Loom:
+
+👉 **Loom Demo:**
+[ https://www.loom.com/share/514d1d6a73194bc2b8b688b62e7f01b6 ]
+
+---
+
+## 📂 GitHub Repository
+
+Repository Link:
+
+https://github.com/YOUR_GITHUB_USERNAME/AI-Revenue-Intelligence-Sales-Outreach-Agent
+
+---
 
 ## 📌 Project Overview
 
-The **AI Revenue Intelligence & Sales Outreach Agent** is an end-to-end AI automation workflow built using **n8n**, **OpenAI**, **Google Sheets**, and **Gmail**.
+The **AI Revenue Intelligence & Sales Outreach Agent** is an end-to-end AI automation workflow built using **n8n**, **OpenAI**, **Google Sheets**, **Gmail**, **JavaScript**, and **Prompt Engineering**.
 
-The workflow automates the complete Go-To-Market (GTM) research process by collecting company intelligence, generating structured sales insights, creating personalized cold emails, storing results in Google Sheets, and automatically sending outreach emails.
+This workflow automates the complete Go-To-Market (GTM) process by performing:
 
-This project demonstrates practical applications of AI in **Sales Engineering**, **Solutions Engineering**, **Forward Deployed Engineering**, and **GTM Engineering**.
+* Company Research
+* Revenue Intelligence
+* Sales Outreach Analysis
+* Structured JSON Generation
+* AI Cold Email Generation
+* Google Sheets Integration
+* Gmail Automation
 
 ---
 
 ## 🚀 Features
 
 * 🔍 AI-powered company research
-* 📊 Revenue intelligence report generation
-* 🎯 Sales opportunity analysis
-* 📈 Lead scoring
+* 📊 Revenue intelligence generation
+* 🎯 Sales outreach insights
 * 👤 Buyer persona identification
-* 💡 Buying signal detection
-* 📧 AI-generated personalized cold emails
+* 📈 Lead scoring
+* 📧 Personalized cold email generation
 * 📄 Structured JSON output
-* 📊 Automatic Google Sheets integration
-* ✉️ Gmail automation for sending emails
-* 🔄 End-to-end workflow automation using n8n
+* 📊 Google Sheets automation
+* ✉️ Gmail automation
+* 🔄 End-to-end workflow automation
 
 ---
 
 ## 🛠 Tech Stack
 
 * n8n
-* OpenAI GPT
+* OpenAI
 * Google Sheets
-* Gmail API
+* Gmail
 * JavaScript
 * JSON
 * Prompt Engineering
 
 ---
 
-## 📂 Workflow Architecture
+## 📸 Workflow Screenshots
+
+### Workflow Architecture
+
+![Workflow](screenshots/workflow.png)
+
+### Successful Execution
+
+![Execution](screenshots/execution-success.png)
+
+### Google Sheets Output
+
+![Google Sheets](screenshots/google-sheet-output.png)
+
+### Gmail Output
+
+![Gmail](screenshots/gmail-output.png)
+
+---
+
+## 🏗 Workflow Architecture
 
 Chat Trigger
 
@@ -80,61 +122,27 @@ Gmail Automation
 
 ---
 
-## 📊 Workflow Output
+## 🎯 Business Value
 
-The workflow automatically generates:
-
-* Company Overview
-* Industry
-* Headquarters
-* Employee Size
-* Founded Year
-* Products & Services
-* Competitor Analysis
-* Target Customers
-* Lead Score
-* Buying Intent
-* Sales Priority
-* Buyer Personas
-* Buying Signals
-* Personalized Cold Email
-* Email Subject
-
----
-
-## 💼 Business Value
-
-This workflow reduces manual research time by automating:
+This project automates repetitive GTM tasks by reducing manual effort in:
 
 * Company research
-* Lead qualification
 * Sales intelligence
-* Email personalization
-* Outreach automation
+* Lead qualification
+* Personalized outreach
 * Data organization
-
----
-
-## 🎯 Ideal Use Cases
-
-* GTM Engineering
-* AI Sales Automation
-* Solutions Engineering
-* Business Development
-* Lead Qualification
-* Sales Development Representatives (SDR)
-* Customer Success Teams
+* Email automation
 
 ---
 
 ## 🔮 Future Enhancements
 
 * Multi-company batch processing
-* CRM integration
 * Recruiter discovery integration
-* Email reply tracking
-* Follow-up email automation
-* AI dashboard and analytics
+* CRM integration
+* Email tracking
+* Follow-up automation
+* AI dashboard
 
 ---
 
@@ -142,12 +150,6 @@ This workflow reduces manual research time by automating:
 
 **Archana Krishnan**
 
-AI Automation | Generative AI | Workflow Automation | Electrical &Electronics Engineer | Solutions Engineering | GTM Engineering
+AI Automation • Generative AI • GTM Engineering • Electrical & Electronics Engineer . Solutions Engineering • Workflow Automation
 
----
 
-## ⭐ Project Status
-
-✅ Completed (Version 1)
-
-Future versions will include recruiter discovery, CRM integration, reply tracking, and multi-company automation.
