@@ -64,7 +64,7 @@ This workflow automates the complete Go-To-Market (GTM) process by performing:
 
 ### Workflow Architecture
 
-![Workflow](screenshots/workflow.png)
+![https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent/blob/main/screenshots/execution-success.png.png]
 
 ### Successful Execution
 
