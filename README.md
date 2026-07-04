@@ -13,7 +13,7 @@ Watch the complete project demonstration on Loom:
 
 Repository Link:
 
-https://github.com/YOUR_GITHUB_USERNAME/AI-Revenue-Intelligence-Sales-Outreach-Agent
+[https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent]
 
 ---
 
