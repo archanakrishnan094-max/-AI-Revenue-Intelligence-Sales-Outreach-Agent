@@ -73,7 +73,7 @@ This workflow automates the complete Go-To-Market (GTM) process by performing:
 
 ### Google Sheets Output
 
-![Google Sheets](screenshots/google-sheet-output.png)
+! [https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent/blob/main/screenshots/google-sheet-output.png.png]
 
 ### Gmail Output
 
