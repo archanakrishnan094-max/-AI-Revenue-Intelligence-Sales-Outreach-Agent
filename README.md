@@ -64,11 +64,12 @@ This workflow automates the complete Go-To-Market (GTM) process by performing:
 
 ### Workflow Architecture
 
-![https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent/blob/main/screenshots/execution-success.png.png]
+![https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent/blob/main/screenshots/workflow.png.png]
+
 
 ### Successful Execution
 
-![Execution](screenshots/execution-success.png)
+![https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent/blob/main/screenshots/execution-success.png.png]
 
 ### Google Sheets Output
 
