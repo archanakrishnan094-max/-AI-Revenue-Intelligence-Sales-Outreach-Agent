@@ -77,7 +77,7 @@ This workflow automates the complete Go-To-Market (GTM) process by performing:
 
 ### Gmail Output
 
-![Gmail](screenshots/gmail-output.png)
+![https://github.com/archanakrishnan094-max/-AI-Revenue-Intelligence-Sales-Outreach-Agent/blob/main/screenshots/gmail-output.png.png]
 
 ---
 
